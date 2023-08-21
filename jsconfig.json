@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["./*"]
+      // remove the forward slash for the erro to be resolved
+      "@*": ["./*"]
     }
   }
 }
