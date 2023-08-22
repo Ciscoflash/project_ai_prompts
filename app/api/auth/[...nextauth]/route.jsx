@@ -18,7 +18,7 @@ const handler = NextAuth({
       return session;
     },
 
-    async signIn({ profile }) {
+    async signIn({ account, profile, user, credentials }) {
       try {
         await connectToDB();
 
@@ -31,13 +31,13 @@ const handler = NextAuth({
         if (!isExist) {
           await User.create({
             email: profile.email,
-            username: profile.name.replace("/s/g", "").toLowerCase(), // this is to make sure there is no space,
+            username: profile.name.replace(" ", "").toLowerCase(), // this is to make sure there is no space,
             image: profile.picture,
           });
         }
         return true;
       } catch (error) {
-        console.log(error);
+        console.log("Error checking if user already exist", error.message);
         return false;
       }
     },
